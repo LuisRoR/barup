@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="post">
+        <div class="flex-container">
+            <div class="row">
+                <div class="row_cell"></div>
+                    <img src="bar5.jpg" height="2182" width="2182">
+                    <div class="centered">
+                        <h1>BarUp</h1>
+                        <h3>A bar inventory tool served straight up!</h3>
+                    </div>
+                </div>
+                
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="row_cell">
+                    <button class="button button-rounded-hover" formaction="/product">Create a Product</button>
+                </div>
+                <div class="row_cell">
+                    <button class="button button-rounded-hover" formaction="/reports">Render Reports</button>
+                </div>
+                <div class="row_cell">
+                    <button class="button button-rounded-hover" formaction="/purchase">Render Purchase</button>
+                </div>
+                <div class="row_cell">
+                    <button class="button button-rounded-hover" formaction="/inventory">Render Inventory</button>
+                </div>
+                <div class="row_cell">
+                    <button class="button button-rounded-hover" formaction="/test">Render Test</button>
+                </div>
+            </div>
+
+        </div>
+
+        
+        <p><h2>{{product.id}}</h2></p> 
+                <h5>{{price}}</h5>
+                <h3>{{qty}}</h3>
+              
+    </form>
+
+{% endblock %}

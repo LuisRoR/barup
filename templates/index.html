@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post">
+      <div class="hero-full-screen">
+        <div class="top-content-section">
+            <div class="top-bar">
+              <div class="top-bar-left">
+                <ul class="menu">
+                  <!-- <li class="menu-text"><img src="http://placehold.it/75x30" alt="logo"></li>-->
+                  <li><a href="/create">Create</a></li>
+                  <li><a href="/catalog">Catalog</a></li>
+                  <li><a href="/purchase">Purchase</a></li>
+                  <li><a href="/reports">Reports</a></li>
+                  <li><a href="/inventory">Inventory</a></li>
+                </ul>
+              </div> <!-- END TOP BAR LEFT--> 
+              <div class="top-bar-right">
+                <ul class="menu">
+                    <li><a href="/test"><i class="fa fa-2x fa-shopping-cart" aria-hidden="true"></i></a></li>
+                </ul>
+              </div> <!-- END TOP BAR RIGHT -->
+            </div> <!-- END TOP BAR -->
+        </div> <!-- END TOP CONTENT -->
+
+        <div class="middle-content-section">
+          <h1>BarUp</h1>
+          <h2>A bar inventory tool served straight up!</h2>
+        </div>
+      
+        <div class="bottom-content-section" data-magellan data-threshold="0">
+          <a href="#main-content-section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12zm-18.005-1.568l1.415-1.414 4.59 4.574 4.579-4.574 1.416 1.414-5.995 5.988-6.005-5.988z"/></svg></a>
+        </div>
+    
+        <div id="main-content-section" data-magellan-target="main-content-section">
+          <!-- your content goes here -->
+                  
+          <p><h2 class="white">{{product_id}}</h2></p> 
+                  <h5 class="white">{{price}}</h5>
+                  <h3 class="white">{{qty}}</h3>          
+        </div>
+    </div> <!-- END HERO --> 
+  </form>
+  
+
+  <script  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+{% endblock %}
