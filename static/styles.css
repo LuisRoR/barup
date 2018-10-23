@@ -257,6 +257,8 @@ body {
 .hero-full-screen-product .middle-content-section {
   text-align: left;
   color: #fefefe;
+  height: 500px;
+  overflow-y: scroll; 
 }
 
 .hero-full-screen-product .top-content-section {
@@ -345,6 +347,60 @@ body {
 }
 
 .hero-full-screen-catalog .top-bar .menu a {
+  color: #fefefe;
+  font-weight: bold;
+}
+
+
+/****************************************/
+/*      hero-full-screen-inventory      */
+/****************************************/
+.hero-full-screen-inventory  {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("bar9.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.hero-full-screen-inventory .middle-content-section {
+  text-align: left;
+  color: #fefefe;
+}
+
+.hero-full-screen-inventory .top-content-section {
+  width: 100%;
+}
+
+.hero-full-screen-inventory .bottom-content-section {
+  padding: 1rem;
+}
+
+.hero-full-screen-inventory .bottom-content-section svg {
+  height: 3.75rem;
+  width: 3.75rem;
+  fill: #fefefe;
+}
+
+.hero-full-screen-inventory .top-bar {
+  background: transparent;
+}
+
+.hero-full-screen-inventory .top-bar .menu {
+  background: transparent;
+}
+
+.hero-full-screen-inventory .top-bar .menu-text {
+  color: #fefefe;
+}
+.hero-full-screen-inventory .top-bar .menu li {
+  display: flex;
+  align-items: center;
+}
+
+.hero-full-screen-inventory.top-bar .menu a {
   color: #fefefe;
   font-weight: bold;
 }
@@ -687,20 +743,16 @@ body {
 
 
 /** Plus to Minus */
-
 .input-number-group {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .input-number-group input[type=number]::-webkit-inner-spin-button,
 .input-number-group input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-          appearance: none;
+  appearance: none;
 }
 
 .input-number-group .input-group-button {
@@ -722,10 +774,7 @@ body {
 .input-number-group .input-number-increment {
   border: 1px solid #cacaca;
   height: 40px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   border-radius: 0;
 }
 
@@ -749,7 +798,6 @@ body {
 .input-number-group .input-number-increment {
   margin-left: 0.3rem;
 }
-
 
 
 /*** shoping cart icon */
@@ -784,4 +832,6 @@ body {
 
 .order-spacer {
   flex: 1;
+  justify-content: space-between;
+  color: transparent;
 }

@@ -3,9 +3,169 @@ from app import app, db
 from models import Product, Purchase, Inventory_check
 import cgi
 from sqlalchemy import desc
+from sqlalchemy.orm import lazyload
 from jinja2 import Template
 
-#from config import Config
+
+"""
+NEW CODE
+"""
+@app.route('/', methods=['GET'])
+def index():
+    """
+    #users = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    paged_users = User.query.order_by(User.username.desc()).paginate(
+        page, 3, False)
+   
+    next_url = url_for('index', page=paged_users.next_num) \
+        if paged_users.has_next else None
+    prev_url = url_for('index', page=paged_users.prev_num) \
+        if paged_users.has_prev else None    
+    
+    users = paged_users.items
+    """
+    return render_template('index.html',
+        title="Index", 
+     )
+
+@app.route('/catalog', methods=['GET'])
+def catalog():
+    #products = session.query(Product).all()
+    #roducts = session.execute(Product.select())
+    products = Product.query.filter_by().all()
+    return render_template('catalog.html',
+        title="Catalog", products=products,
+     )
+
+@app.route('/buy', methods=['POST'])
+def add_to_cart():
+    #products = session.query(Product).all()
+    #roducts = session.execute(Product.select())
+    #products = Product.query.filter_by().all()
+    #product_id = (int)(request.form['product_id'])
+
+    #print(product_id )
+    #print(price)
+    #SSprint(quantity)
+
+    quantity = (int)(request.form['quantity'])
+    price = (float)(request.form['price'])
+    product_id = (int)(request.form['product_id'])
+  
+    #new_purchase = Purchase(quantity, price, product_id, pur_date=None)
+
+        # if the user typed nothing at all, redirect and tell them the error
+    #if (not price) or (price.strip() == ""):
+     #   error = "Please specify the movie you want to add."
+     #   return redirect("/?error=" + error)
+
+    new_purchase = Purchase(quantity, price, product_id,)
+
+    db.session.add(new_purchase)
+    db.session.commit()
+
+    products = Product.query.filter_by().all()
+    return render_template('catalog.html',
+        title="Catalog", products=products, 
+     )
+
+
+@app.route('/product', methods=['POST'])
+def product():
+    brand = request.form['brand']
+    name = request.form['name']
+    bottle_weight = 1400.00
+    vintage = 2000
+    label_name  = request.form['label_name']
+    country = request.form['country']
+    volume = request.form['volume']
+    category = "spirit"
+    description = request.form['description']
+    new_product = Product(brand, name, bottle_weight, vintage, label_name, country, volume, category, description)
+
+    db.session.add(new_product)
+    db.session.commit()
+
+
+   
+    return render_template('product.html', 
+        title="product", 
+        product=new_product,
+    )
+
+
+@app.route('/inventory', methods=['GET'])
+def inventory():
+    #products = session.query(Product).all()
+    #roducts = session.execute(Product.select())
+    products = Product.query.filter_by().all()
+    return render_template('inventory.html',
+        title="Inventory", products=products,
+     )
+
+
+@app.route('/create', methods=['GET'])
+def create():
+
+    """
+    #users = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    paged_users = User.query.order_by(User.username.desc()).paginate(
+        page, 3, False)
+
+    next_url = url_for('index', page=paged_users.next_num) \
+        if paged_users.has_next else None
+    prev_url = url_for('index', page=paged_users.prev_num) \
+        if paged_users.has_prev else None    
+    
+    users = paged_users.items
+    """
+    return render_template('create.html',
+        title="create", 
+     )
+
+@app.route('/dummy', methods=[ 'GET'])
+def dummy():
+
+    return render_template('dummy.html',
+        title="dummy", 
+     )
+
+@app.route('/reports', methods=['GET'])
+def reports():
+
+    """
+    #users = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    paged_users = User.query.order_by(User.username.desc()).paginate(
+        page, 3, False)
+
+    next_url = url_for('index', page=paged_users.next_num) \
+        if paged_users.has_next else None
+    prev_url = url_for('index', page=paged_users.prev_num) \
+        if paged_users.has_prev else None    
+    
+    users = paged_users.items
+    """
+    return render_template('reports.html',
+        title="reports", 
+     )
+
+@app.route('/test', methods=['GET'])
+def test():
+
+    return render_template('test.html',
+        title="test", 
+     )
+
+@app.route('/product2', methods=['GET'])
+def product2():
+
+    return render_template('product2.html',
+        title="product2", 
+     )
+
 
 """
 @app.before_request
@@ -115,53 +275,12 @@ def index():
         next_url=next_url,
         prev_url=prev_url)
 """
-
 """
-NEW CODE
+    return render_template('index.html',
+        title="Index", id=product_id, qty=quantity, price=price,
+     )
 """
-@app.route('/', methods=['GET'])
-def index():
-    """
-    #users = User.query.all()
-    page = request.args.get('page', 1, type=int)
-    paged_users = User.query.order_by(User.username.desc()).paginate(
-        page, 3, False)
-   
-    next_url = url_for('index', page=paged_users.next_num) \
-        if paged_users.has_next else None
-    prev_url = url_for('index', page=paged_users.prev_num) \
-        if paged_users.has_prev else None    
-    
-    users = paged_users.items
-    """
-    return render_template('index.html',
-        title="Index", 
-     )
 
-@app.route('/catalog', methods=['GET'])
-def catalog():
-    #products = session.query(Product).all()
-    #roducts = session.execute(Product.select())
-    products = Product.query.filter_by().all()
-    return render_template('catalog.html',
-        title="Catalog", products=products,
-     )
-
-@app.route('/buy', methods=['POST'])
-def add_to_cart():
-    #products = session.query(Product).all()
-    #roducts = session.execute(Product.select())
-    #products = Product.query.filter_by().all()
-    #product_id = (int)(request.form['product_id'])
-    product_id = (int)(request.form['product_id'])
-    price = (float)(request.form['price'])
-    quantity = (int)(request.form['quantity'])
-    #print(product_id )
-    #print(price)
-    #SSprint(quantity)
-    return render_template('index.html',
-        title="Index", product_id=product_id, price=price, quantity=quantity,
-     )
 """
 @app.route('/blog', methods=['POST', 'GET'])
 def list_blogs(): 
@@ -248,112 +367,7 @@ def single_user():
         user=user) 
 """
 
-@app.route('/dummy', methods=[ 'GET'])
-def dummy():
 
-    return render_template('dummy.html',
-        title="dummy", 
-     )
-
-@app.route('/product', methods=['POST'])
-def product():
-    brand = request.form['brand']
-    name = request.form['name']
-    bottle_weight = 1400.00
-    vintage = 2000
-    label_name  = request.form['label_name ']
-    country = request.form['country']
-    volume = request.form['volume']
-    category = "spirit"
-    description = request.form['description']
-    new_product = Product(brand, name, bottle_weight, vintage, label_name, country, volume, category, description)
-
-    db.session.add(new_product)
-    db.session.commit()
-
-
-   
-    return render_template('product.html', 
-        title="product", 
-        product=new_product,
-    )
-
-@app.route('/inventory', methods=['GET'])
-def inventory():
-
-
-    """
-    #users = User.query.all()
-    page = request.args.get('page', 1, type=int)
-    paged_users = User.query.order_by(User.username.desc()).paginate(
-        page, 3, False)
-
-    next_url = url_for('index', page=paged_users.next_num) \
-        if paged_users.has_next else None
-    prev_url = url_for('index', page=paged_users.prev_num) \
-        if paged_users.has_prev else None    
-    
-    users = paged_users.items
-    """
-    return render_template('inventory.html',
-        title="inventory", 
-     )
-
-@app.route('/create', methods=['GET'])
-def create():
-
-
-    """
-    #users = User.query.all()
-    page = request.args.get('page', 1, type=int)
-    paged_users = User.query.order_by(User.username.desc()).paginate(
-        page, 3, False)
-
-    next_url = url_for('index', page=paged_users.next_num) \
-        if paged_users.has_next else None
-    prev_url = url_for('index', page=paged_users.prev_num) \
-        if paged_users.has_prev else None    
-    
-    users = paged_users.items
-    """
-    return render_template('create.html',
-        title="create", 
-     )
-
-@app.route('/reports', methods=['GET'])
-def reports():
-
-
-    """
-    #users = User.query.all()
-    page = request.args.get('page', 1, type=int)
-    paged_users = User.query.order_by(User.username.desc()).paginate(
-        page, 3, False)
-
-    next_url = url_for('index', page=paged_users.next_num) \
-        if paged_users.has_next else None
-    prev_url = url_for('index', page=paged_users.prev_num) \
-        if paged_users.has_prev else None    
-    
-    users = paged_users.items
-    """
-    return render_template('reports.html',
-        title="reports", 
-     )
-
-@app.route('/test', methods=['GET'])
-def test():
-
-    return render_template('test.html',
-        title="test", 
-     )
-
-@app.route('/product2', methods=['GET'])
-def product2():
-
-    return render_template('product2.html',
-        title="product2", 
-     )
 
 if __name__ == '__main__':
     app.run()

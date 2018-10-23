@@ -11,20 +11,31 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
       
-        <style>
+        <style type="text/css">
             .error {
                 color: red;
             }
         </style>
     </head>
     <body>
-
+        <!--
         {% with messages = get_flashed_messages(with_categories=True) %}
             <ul>
             {% for category,message in messages %}
                 <li class="{{category}}">{{message}}</li>
             {% endfor %}
             </ul>
+        {% endwith %}
+        -->
+ 
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endwith %}
 
         {% block content %}

@@ -8,11 +8,12 @@
                 <div class="top-bar-left">
                 <ul class="menu">
                     <!-- <li class="menu-text"><img src="http://placehold.it/75x30" alt="logo"></li>-->
+                    <li><a href="/">Home</a></li>
                     <li><a href="/create">Create</a></li>
                     <li><a href="/catalog">Catalog</a></li>
                     <li><a href="/purchase">Purchase</a></li>
-                    <li><a href="/reports">Reports</a></li>
                     <li><a href="/inventory">Inventory</a></li>
+                    <li><a href="/reports">Reports</a></li> 
                 </ul>
                 </div>
                 <div class="top-bar-right">
@@ -31,7 +32,7 @@
                     <div class="product-card">
                         <div class="product-card-thumbnail">
                             <div class="card-product-img-wrapper">
-                                <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}"/>
+                                <input type="hidden" name="product_id" value="{{ product.id }}"/>
                                 <button class="expanded button-hover-addcart button" formaction="/buy"><span>Buy</span><i class="fa fa-shopping-cart"></i></button>
                                 <a href="#"><img src="static/media/{{product.label_name }}"></a>
                             </div>
@@ -45,15 +46,15 @@
                         <hr>
                         <div class="order-form"> 
                             <div class="oder-price">
-                                <span class="label-purchase">Price:</span>
-                                <input class="price" id="price" name="price" type="text" value="">
+                                <span class="order-label">Price:</span>
+                                <input class="price" name="price" type="text" value="">
                             </div>
                             <div class="order-spacer">
-
+                                <span> - </span>
                             </div>
                             <div class="oder-qty">
-                                <span class="label-quantity">Qty:</span>
-                                <input class="quantity" id="quantity" name="quantity" type="number" value="0" min="0" max="1000">
+                                <span class="order-label">Qty:</span>
+                                <input class="quantity" name="quantity" type="number" value="0" min="0" max="1000">
                             </div>
                         </div>
 <!--
