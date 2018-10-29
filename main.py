@@ -3,6 +3,7 @@ from app import app, db
 from models import Product, Purchase, Inventory_check
 import cgi
 from sqlalchemy import desc
+from sqlalchemy.sql import exists
 from sqlalchemy.orm import lazyload
 from jinja2 import Template
 
@@ -10,6 +11,11 @@ from jinja2 import Template
 """
 NEW CODE
 """
+@app.template_filter('datetimeformat')
+def datetimeformat(value, format='%B %d, %Y'):
+    return value.strftime(format)
+#{{ post.date_posted|datetimeformat('%B %d, %Y') }}
+
 @app.route('/', methods=['GET'])
 def index():
     """
@@ -82,8 +88,20 @@ def product():
     volume = request.form['volume']
     category = "spirit"
     description = request.form['description']
+    
+    name_query = Product.query.filter(Product.name == name)
+    #name_query = Product.query.filter_by(Product.name == 'Black Label')
+    if ( name_query.count() > 0 ):
+        #flash('Prouct already exist')
+        #return redirect('/create')
+        error = 'Prouct already exist'
+        return redirect("/create?=" + error) 
+  #if ( session.query(Product.query.filter(Product.name == name).exists()).scalar() ):
+
+
     new_product = Product(brand, name, bottle_weight, vintage, label_name, country, volume, category, description)
 
+    products = Product.query.filter_by().all()
     db.session.add(new_product)
     db.session.commit()
 
@@ -94,6 +112,25 @@ def product():
         product=new_product,
     )
 
+
+@app.route('/purchase', methods=['GET'])
+def purchase():
+  
+    return render_template('purchase.html', 
+        title="Purchase", 
+    )
+
+@app.route('/display_purchase', methods=['POST'])
+def display_purchase():
+
+    start_date = request.form['start-date']
+    end_date = request.form['end-date']
+   
+    #purchases = Purchase.query.filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date)
+    purchases = session.query(Purchase).filter(Purchase.purchase_date <= end_date)
+    return render_template('display_purchase.html', 
+        title="Display purchase", purchases=purchases, start=start_date, end=end_date,
+    )
 
 @app.route('/inventory', methods=['GET'])
 def inventory():
@@ -151,6 +188,12 @@ def reports():
     return render_template('reports.html',
         title="reports", 
      )
+
+@app.route('/graph')
+def graph():
+    import random
+    data = [random.randrange(0, 5) for _ in range(5)]
+    return render_template('graph.html', data=data)
 
 @app.route('/test', methods=['GET'])
 def test():

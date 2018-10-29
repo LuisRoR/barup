@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method='POST'>
+    <div class="hero-full-screen-purchase">
+        <div class="top-content-section">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                <ul class="menu">
+                    <!-- <li class="menu-text"><img src="http://placehold.it/75x30" alt="logo"></li>-->
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/create">Create</a></li>
+                    <li><a href="/catalog">Catalog</a></li>
+                    <li><a href="/purchase">Purchase</a></li>
+                    <li><a href="/inventory">Inventory</a></li>
+                    <li><a href="/reports">Reports</a></li> 
+                </ul>
+                </div>
+                <div class="top-bar-right">
+                <ul class="menu">
+                    <li><a href="/test"><i class="fa fa-2x fa-shopping-cart" aria-hidden="true"></i></a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-date">
+            <h1>{{start}}</h1>
+            <h1>{{end}}</h1>
+        </div>
+
+        <div class="middle-content-section">
+            <div class="flex-container-date">
+                <div>
+                    <label class="label-date" for="start">Purchases START date:</label>
+                    <input type="date" id="start" name="start-date" min="2017-01-01" max="2018-11-08" required>
+                </div>
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+                <div>
+                    <label class="label-date" for="end">Purchases END date:</label>
+                    <input type="date" id="end" name="end-date" min="2017-01-01" max="2018-11-08" required>
+                </div>
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+                <div>
+                    <label class="submit-date" for="invoice"> - </label>
+                    <input class="btn-date" id="invoice" name="invoice" type="submit" >
+                </div>  
+            </div>
+        </div>
+    
+      
+        <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
+        {% if purchases|length > 0 %}
+            <div class="product-section">
+            {% for purchase in purchases: %}
+            
+                <div class="test-purchase">
+                <h2>{{purchase.id}}</h2>
+                </div>
+   
+            {% endfor %} 
+            </div>  <!-- END product-section -->
+    
+        {% endif %}  
+        
+
+   
+    </div> <!-- END HERO -->
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='cart.js') }}"></script>
+
+{% endblock %}

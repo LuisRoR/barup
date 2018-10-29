@@ -105,7 +105,7 @@ body {
 /****************************************/
   .translucent-form-overlay {
     max-width: 350px;
-    width: 100%;
+    width: 250%;
     height: 500px;
     background-color: rgba(54, 54, 54, 0.8);
     padding: 20px;
@@ -120,14 +120,21 @@ body {
   .translucent-form-overlay H3, .translucent-form-overlay label {
     color: #fefefe;
     height: 50px;
+    
   }
   
   .translucent-form-overlay input, .translucent-form-overlay select {
-    color: #8a8a8a;
+    color: #cacaca;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: 20px;
+    padding-bottom: 15px;
   }
   
   .translucent-form-overlay input::placeholder {
     color: #8a8a8a;
+    left: 25px;
   }
   
 
@@ -351,6 +358,60 @@ body {
   font-weight: bold;
 }
 
+/****************************************/
+/*       hero-full-screen-purchase      */
+/****************************************/
+.hero-full-screen-purchase {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("bar21.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.hero-full-screen-purchase .middle-content-section {
+  text-align: left;
+  color: #fefefe;
+}
+
+.hero-full-screen-purchase .top-content-section {
+  width: 100%;
+}
+
+.hero-full-screen-purchase .bottom-content-section {
+  padding: 1rem;
+
+}
+
+.hero-full-screen-purchase .bottom-content-section svg {
+  height: 3.75rem;
+  width: 3.75rem;
+  fill: #fefefe;
+}
+
+.hero-full-screen-purchase .top-bar {
+  background: transparent;
+}
+
+.hero-full-screen-purchase .top-bar .menu {
+  background: transparent;
+}
+
+.hero-full-screen-purchase .top-bar .menu-text {
+  color: #fefefe;
+}
+
+.hero-full-screen-purchase .top-bar .menu li {
+  display: flex;
+  align-items: center;
+}
+
+.hero-full-screen-purchase.top-bar .menu a {
+  color: #fefefe;
+  font-weight: bold;
+}
 
 /****************************************/
 /*      hero-full-screen-inventory      */
@@ -361,7 +422,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: url("bar9.jpg") center center no-repeat;
+  background: url("bar21.jpg") center center no-repeat;
   background-size: cover;
 }
 
@@ -568,6 +629,7 @@ body {
   top: 20px;
   font-size: 14px;
   font-weight: 300;
+  color: #cacaca;
 }
 
 .form-floating-label input:focus ~ label,
@@ -835,3 +897,88 @@ body {
   justify-content: space-between;
   color: transparent;
 }
+
+
+/* TEST PURCHASE */
+.test-purchase {
+  display: flex;
+  background-color:  white;
+  justify-content: space-between;
+  padding-right: .8em;
+
+}
+
+
+
+/* DATE PICKER */
+.date-picker{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  flex-direction: row;
+ 
+}
+
+.flex-container-date {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  flex-direction: row;
+  height: 80px;
+  
+}
+
+.label-date {
+display: inline-table;
+max-width: 150px;
+color: white;
+font-weight: 400px;
+}
+
+.btn-date{
+  display: inline-table;
+  height: 46px;
+  width: 150px;
+  color: #8a8a8a;
+  background-color: rgb(73, 41, 2);
+  
+}
+
+input:invalid+span:after {
+  content: '✖';
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  content: '✓';
+  padding-left: 5px;
+}
+
+
+/* TEST DATE */
+.test-date{
+  color: white;
+}
+
+
+.error {
+    color: red;
+}
+
+
+.flex-container-date-range {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  flex-direction: row;
+
+}
+
+.label-date-range {
+  padding-bottom: 20px;
+}
+
+

@@ -42,15 +42,15 @@ class Purchase (db.Model):
     quantity = db.Column(db.Integer)
     price = db.Column(db.Float)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    purchase_date = db.Column(db.DateTime)
+    purchase_date = db.Column(db.Date)
     inventory = db.relationship('Inventory_check', backref='purchase', )
     def __init__(self, quantity, price, product, purchase_date=None):
         self.quantity = quantity
         self.price = price
         self.product_id = product
         if purchase_date is None:
-            purchase_date = datetime.utcnow().strftime("%Y%m%d")
-            #purchase_date = date.today()
+            #purchase_date = datetime.utcnow()
+            purchase_date = date.today()
         self.purchase_date = purchase_date
 
 class Inventory_check (db.Model):
@@ -58,14 +58,16 @@ class Inventory_check (db.Model):
     approx_level = db.Column(db.Float)
     weight = db.Column(db.Float)
     purchase_id = db.Column(db.Integer, db.ForeignKey('purchase.id'), nullable=False)
-    date_consumed = db.Column(db.DateTime)
-    date_measured = db.Column(db.DateTime)
+    date_consumed = db.Column(db.Date)
+    date_measured = db.Column(db.Date)
     def __init__(self, approx_level, weight, purchase, date_consumed , date_measured=None):
         self.approx_level = approx_level
         self.weight = weight
         self.purchase_id = purchase
         self.date_consumed  = date_consumed 
         if date_measured  is None:
-            date_measured  = datetime.utcnow()
+            date_measured  = date.today()
         self.date_measured  = date_measured                 
 
+#current_date = datetime.date.today()
+#.strftime("%Y%m%d")

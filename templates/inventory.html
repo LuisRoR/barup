@@ -31,12 +31,12 @@
                 <form method="POST">
                     <div class="product-card">
                         <div class="product-card-thumbnail">
-                            <div class="card-product-img-wrapper">
+                             <div class="card-product-img-wrapper"> 
                                 <input type="hidden" name="product_id" value="{{ product.id }}"/>
                                 <button class="expanded button-hover-addcart button" formaction="/buy"><span>Buy</span><i class="fa fa-shopping-cart"></i></button>
                                 <a href="#"><img src="static/media/{{product.label_name }}"></a>
-                            </div>
-                        </div>
+                            </div> <!-- END IM WRAPPER -->
+                        </div> <!-- END CAR THUMBNAIL -->
                         <h2 class="product-card-title"><a href="#">{{product.name}}</a></h2>
                         <span class="product-card-desc">{{product.description}}</span>
                         <!--

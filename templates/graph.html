@@ -1,0 +1,17 @@
+{% for value in  data %}
+    <div style="width: {{ value * 20}}px;">
+        {{ value }}
+    </div>
+{% endfor %}
+<style>
+div {
+    background-color:steelblue;
+    height:14px;
+    margin-bottom: 2px;
+    text-align: right;
+    color: white;
+    padding-right: 2px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+</style>
