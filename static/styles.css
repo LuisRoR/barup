@@ -422,7 +422,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: url("bar21.jpg") center center no-repeat;
+  background: url("bar15.jpg") center center no-repeat;
   background-size: cover;
 }
 
@@ -583,6 +583,65 @@ body {
   font-weight: 600;
   margin-top: 0.8rem; 
 }
+
+
+
+
+
+
+/***  INVENTORY product-section  ***/
+.product-section-inventory {
+  display: flex;
+  flex-wrap: wrap;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.product-card-inventory {
+  background-color: $white;
+  border: 1px solid $light-gray;
+  padding: 1rem;
+  margin-bottom: 1.5rem; 
+  width:130px; 
+}
+
+.product-card-thumbnail-inventory  {
+  display: block;
+  position: relative;
+}
+
+.product-card-thumbnail-inventory :hover .card-product-img-wrapper-inventory  img {
+  filter: grayscale(0);
+}
+
+.product-card-thumbnail-inventory :hover .card-product-img-wrapper-inventory  .button {
+  transform: translateY(-3rem);
+}
+
+.product-card-title-inventory  {
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.product-card-desc-inventory  {
+  color: whitesmoke;
+  display: block;
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.85rem;
+}
+
+.product-card-price-inventory  {
+  color: whitesmoke;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.8rem; 
+}
+
 
 
 
@@ -905,6 +964,8 @@ body {
   background-color:  white;
   justify-content: space-between;
   padding-right: .8em;
+  color: red;
+  font-weight: 500;
 
 }
 
@@ -942,7 +1003,7 @@ font-weight: 400px;
   height: 46px;
   width: 150px;
   color: #8a8a8a;
-  background-color: rgb(73, 41, 2);
+  background-color: rgb(46, 25, 0);
   
 }
 
@@ -960,6 +1021,7 @@ input:valid+span:after {
 /* TEST DATE */
 .test-date{
   color: white;
+  font-weight: 800;
 }
 
 
@@ -967,7 +1029,7 @@ input:valid+span:after {
     color: red;
 }
 
-
+/* Responsive table */
 .flex-container-date-range {
   margin-bottom: 30px;
   display: flex;
@@ -980,5 +1042,280 @@ input:valid+span:after {
 .label-date-range {
   padding-bottom: 20px;
 }
+
+
+
+.responsive-card-table {
+  border-collapse: collapse;
+}
+
+.responsive-card-table.unstriped tbody {
+  background-color: transparent;
+}
+
+.responsive-card-table th {
+  color: #8a8a8a;
+  background-color: rgb(46, 25, 0);
+}
+
+.responsive-card-table tr,
+.responsive-card-table th,
+.responsive-card-table td {
+  border: 1px solid #0a0a0a;
+}
+
+@media screen and (max-width: 640px) {
+  .responsive-card-table {
+    
+  }
+  .responsive-card-table thead tr {
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
+  }
+  .responsive-card-table tr {
+    border: 1px solid #0a0a0a;
+    display: block;
+  }
+  .responsive-card-table tr + tr {
+    margin-top: 1.5rem;
+  }
+  .responsive-card-table td {
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #0a0a0a;
+    padding-left: 50%;
+    position: relative;
+  }
+  .responsive-card-table td:before {
+    content: attr(data-label);
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-left: -100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .responsive-card-table td:after {
+    content: '';
+    position: absolute;
+    background: #e6e6e6;
+    width: 45%;
+    height: 95%;
+    left: 1px;
+    top: 1px;
+    z-index: 0;
+  }
+}
+
+.grand-total{
+  margin-bottom: 30px;
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+
+
+
+.btn-inventory{
+  display: inline-table;
+  height: 46px;
+  width: 150px;
+  color: #8a8a8a;
+  background-color: rgb(25, 2, 87);
+  
+}
+
+
+
+
+
+
+/*   FLASH   */
+#flash {
+  .notice {
+  padding: 8px 14px;
+  margin-bottom: 20px;
+  background-color: #fcf8e3;
+  @include border-radius(2px);
+  }
+  .flash-message {
+  display: inline-block;
+  }
+  button.flash-close {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 0;
+  margin: 0;
+  float: right;
+  color: #984949;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  &:hover {
+  cursor: pointer;
+  }
+  }
+  .success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  }
+  .error {
+  background-color: #ead2d3;
+  border-color: #eed3d7;
+  color: #984949;
+  }
+  .info {
+  background-color: #d9edf7;
+  color: #3a87ad;
+  }
+  
+
+
+
+  /**** BAR GRAPH ***/
+
+.bar-graph {
+  padding: 0;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 425px;
+  margin: 0;
+}
+
+.bar-graph li {
+  display: block;
+  padding: 1.5625rem 0;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+  border-radius: 4px 4px 0 0;
+  max-width: 20%;
+  height: 100%;
+  margin: 0 1.8% 0 0;
+  -webkit-flex: 1 1 15%;
+      -ms-flex: 1 1 15%;
+          flex: 1 1 15%;
+}
+
+.bar-graph .bar-graph-axis {
+  -webkit-flex: 1 1 8%;
+      -ms-flex: 1 1 8%;
+          flex: 1 1 8%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.bar-graph .bar-graph-label {
+  margin: 0;
+  background-color: none;
+  color: #8a8a8a;
+  position: relative;
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px dashed #8a8a8a;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 20%;
+  }
+}
+
+@media print, screen and (min-width: 40em) and (min-width: 64em) {
+  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+    width: 30%;
+  }
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .bar-graph-label:after {
+    left: auto;
+    right: 0;
+  }
+}
+
+.bar-graph .percent {
+  letter-spacing: -3px;
+  opacity: 0.4;
+  width: 100%;
+  font-size: 1.875rem;
+  position: absolute;
+}
+
+@media print, screen and (min-width: 40em) {
+  .bar-graph .percent {
+    font-size: 3.875rem;
+  }
+}
+
+.bar-graph .percent span {
+  font-size: 1.875rem;
+}
+
+.bar-graph .description {
+  font-weight: 800;
+  opacity: 0.5;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 14px;
+  bottom: 20px;
+  position: absolute;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.bar-graph .bar.primary {
+  border: 1px solid #1779ba;
+  background: linear-gradient(#2196e3, #1779ba 70%);
+}
+
+.bar-graph .bar.secondary {
+  border: 1px solid #767676;
+  background: linear-gradient(#909090, #767676 70%);
+}
+
+.bar-graph .bar.success {
+  border: 1px solid #3adb76;
+  background: linear-gradient(#65e394, #3adb76 70%);
+}
+
+.bar-graph .bar.warning {
+  border: 1px solid #ffae00;
+  background: linear-gradient(#ffbe33, #ffae00 70%);
+}
+
+.bar-graph .bar.alert {
+  border: 1px solid #cc4b37;
+  background: linear-gradient(#d67060, #cc4b37 70%);
+}
+
+
+
+
 
 

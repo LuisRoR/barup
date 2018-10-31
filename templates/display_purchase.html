@@ -23,23 +23,58 @@
                 </div>
             </div>
         </div>
-        <div class="text-date">
-            <h1>{{start}}</h1>
-            <h1>{{end}}</h1>
-        </div>
 
-        <div class="middle-content-section">
-            <div class="flex-container-date">
-                <div>
-                    <label class="label-date" for="start">Purchases START date:</label>
-                    <input type="date" id="start" name="start-date" min="2017-01-01" max="2018-11-08" required>
-                </div>
-                <div class="order-spacer">
-                        <span> - </span>
-                </div>
-                <div>
-                    <label class="label-date" for="end">Purchases END date:</label>
-                    <input type="date" id="end" name="end-date" min="2017-01-01" max="2018-11-08" required>
+     
+        <div class="text-date">
+            <h3>Purchases from {{start}} - {{end}}</h3> 
+        </div>
+      
+       
+        {% if purchases|length > 0 %}
+            <table class="responsive-card-table unstriped">       
+                <thead>
+                    <tr>
+                    <th>Inovice</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for purchase in purchases: %}
+              
+                    <tr>
+                        <td data-label="nvoice">{{purchase.id}}</td>
+                        <td data-label="Date">{{purchase.purchase_date}}</td>
+                        <td data-label="Product">{{purchase.brand}} {{purchase.name}}</td>
+                        <td data-label="Price">${{purchase.price}}</td>
+                        <td data-label="Quantity">{{purchase.quantity}} </td>
+                        <td data-label="Total">${{purchase.price * purchase.quantity}}</td>
+                    </tr>
+
+                {% endfor %} 
+                </tbody>
+            </table> <!-- END TABLE responsive-card-table unstriped -->
+
+    
+        {% endif %}  
+
+        <table class="grad-total">
+            <tr>
+                <td> Grand Total <smaller>( Purchases from {{start}} - {{end}} )</smaller> : ${{total}}</td>
+            </tr>
+        </table>
+
+
+
+
+        <div class="bottom-content-section">
+            <div class="flex-container-date-range">
+                <div class="form-floating-label">
+                    <input type="date" name="start-date">
+                    <label class="label-date-range" for="start-date" >From:</label>
                 </div>
 
                 <span class="validity"></span>
@@ -47,28 +82,27 @@
                 <div class="order-spacer">
                         <span> - </span>
                 </div>
-                <div>
-                    <label class="submit-date" for="invoice"> - </label>
-                    <input class="btn-date" id="invoice" name="invoice" type="submit" >
-                </div>  
-            </div>
-        </div>
-    
-      
-        <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
-        {% if purchases|length > 0 %}
-            <div class="product-section">
-            {% for purchase in purchases: %}
-            
-                <div class="test-purchase">
-                <h2>{{purchase.id}}</h2>
+
+                <div class="form-floating-label">
+                    <input type="date" name="end-date">
+                    <label class="label-date-range" for="end-date" >To:</label>
                 </div>
-   
-            {% endfor %} 
-            </div>  <!-- END product-section -->
-    
-        {% endif %}  
-        
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+
+                <div>
+                    <!--
+                    <label class="submit-date" for="date_qry"> - </label>>
+                    -->>
+                    <input class="btn-date" id="date_qry" name="date_qry" type="submit"  formaction="/display_purchase">
+                </div> 
+            </div>
+        </div> <!--   END of bottom-content-section   -->
+            
 
    
     </div> <!-- END HERO -->

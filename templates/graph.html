@@ -3,6 +3,15 @@
         {{ value }}
     </div>
 {% endfor %}
+
+
+{% for value in  data %}
+    <div class="colunm" style="width: {{ value * 20}}px;">
+        {{ value }}
+    </div>
+{% endfor %}
+
+
 <style>
 div {
     background-color:steelblue;

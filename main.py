@@ -16,6 +16,38 @@ def datetimeformat(value, format='%B %d, %Y'):
     return value.strftime(format)
 #{{ post.date_posted|datetimeformat('%B %d, %Y') }}
 
+@app.route("/chart")
+def chart():
+    i = 0
+    test=''
+    labels = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    #values = [10,9,8,7,6,4,7,8,5,8,6,9]
+    values = [0,0,0,0,0,0,0,0,0,0,0,0]
+    listLen = len(labels)
+    format='%B'
+    purchases = Purchase.query.filter_by().all()
+    
+    total = 0
+    for purchase in purchases:
+        total += purchase.price * purchase.quantity
+        test = purchase.purchase_date.strftime(format)
+        print('@@@@@TEST@@@@@', test)
+        print('%%%%%%', labels[i])
+    
+        print('&&&&&&&&&&', listLen)
+        (test != labels[i]) and (i < listLen):
+            values.insert(i, 0)
+            i += 1
+        if (test == labels[i]):
+            values.insert(i, (purchase.price * purchase.quantity)) 
+        print('!!!!!!!!!!!!!!!!!VALUES', values)
+        
+
+    #labels = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    #values = [10,9,8,7,6,4,7,8,5,8,6,9]
+    return render_template('chart.html', values=values, labels=labels, total=total)
+ 
+
 @app.route('/', methods=['GET'])
 def index():
     """
@@ -71,6 +103,7 @@ def add_to_cart():
     db.session.add(new_purchase)
     db.session.commit()
 
+
     products = Product.query.filter_by().all()
     return render_template('catalog.html',
         title="Catalog", products=products, 
@@ -116,6 +149,7 @@ def product():
 @app.route('/purchase', methods=['GET'])
 def purchase():
   
+    start_dte = 1
     return render_template('purchase.html', 
         title="Purchase", 
     )
@@ -125,18 +159,95 @@ def display_purchase():
 
     start_date = request.form['start-date']
     end_date = request.form['end-date']
-   
+    
     #purchases = Purchase.query.filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date)
-    purchases = session.query(Purchase).filter(Purchase.purchase_date <= end_date)
+    #purchases = session.query(Purchase).filter(Purchase.purchase_date <= end_date)
+    
+    # +++++++++
+    # This Line (below) WORKS, wel.....
+    #purchases = Purchase.query.filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date ).all()
+    # +++++++++
+
+
+
+    #   ------------------- TEST --------------------  .filter(Purchase.product_id == userID)
+
+
+
+    #purchases = Purchase.query.filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date ).all()
+    
+    
+    # ***********
+    # THIS LINE GENERATES:   ---  TypeError: object of type 'BaseQuery' has no len()  -- #productList = Product.query.join(Purchase).add_columns(Product.id, Product.brand, Product.name, Purchase.product_id, Purchase.quantity, Purchase.price, Purchase.purchase_date).filter( Product.id == Purchase.product_id)
+    purchases= Purchase.query.join(Product, Purchase.product_id == Product.id).add_columns(Product.id, Product.brand, Product.name, Purchase.id, Purchase.product_id, Purchase.quantity, Purchase.price, Purchase.purchase_date,).filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date).filter(Purchase.product_id == Product.id).all()
+    
+    total = 0
+    for purchase in purchases:
+        total += purchase.price * purchase.quantity
+
+    print("*********************")
+    print("*********************")
+    print("*********************")
+    print("*********************")
+    print("*********************")
+    print("*********************")
+    
+    
+    
+    
+    # +++++++++
+    # TEST CODE 
+    # +++++++++
+    #purchase = (Session.query(User,Product)
+    #.filter(Product.id == Purchase.product_id)
+    #.filter(Document.name == DocumentPermissions.document)
+    #.filter(User.email == 'someemail')
+    #.all())
+
     return render_template('display_purchase.html', 
-        title="Display purchase", purchases=purchases, start=start_date, end=end_date,
+        #   WORKING CODEtitle="Display purchase", purchases=purchases, start=start_date, end=end_date,
+        title="Display purchase", purchases=purchases , start=start_date, end=end_date, total=total,
     )
 
-@app.route('/inventory', methods=['GET'])
+@app.route('/inventory', methods=['POST', 'GET'])
 def inventory():
-    #products = session.query(Product).all()
+    start_date = request.form['start-date']
+    end_date = request.form['end-date']
+
+    #if start_date == 
+    #products = db.session.query(Product).all()
     #roducts = session.execute(Product.select())
-    products = Product.query.filter_by().all()
+    ####  WORKS ###       
+    #products = Product.query.filter_by().all()
+
+    #purchases = Purchase.query.filter_by().all()
+    #purchases= Purchase.query.join(Product, Purchase.product_id == Product.id).add_columns(Product.id, Product.brand, Product.name, Purchase.id, Purchase.product_id, Purchase.quantity, Purchase.price, Purchase.purchase_date,).filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date).filter(Purchase.product_id == Product.id).all()
+
+    # inventories = Inventory.query.join(Product, Purchase.product_id == Product.id).add_columns(Product.id, Product.brand, Product.name, Purchase.id, Purchase.product_id, Purchase.quantity, Purchase.price, Purchase.purchase_date,).filter(Purchase.purchase_date >= start_date, Purchase.purchase_date <= end_date).filter(Purchase.product_id == Product.id).all()
+    products = list(db.session.execute(
+    """
+    SELECT product_id, SUM(quantity)
+    FROM Purchase
+    WHERE id NOT IN (
+    	SELECT purchase_id FROM inventory_check
+    	-- A purchase is added to inventory_check when it's consumed.
+    	WHERE (date_consumed > '2018-10-01') AND (date_consumed > '2018-10-01')
+    	-- if it's not there yet, it's not yet consumed
+        -- WHERE date_consumed > :start_date
+    ) 
+    GROUP BY product_id
+    """  ,
+    {'start_date': start_date}
+    ))
+
+
+    
+    
+
+
+    flash('demo message')
+
+
     return render_template('inventory.html',
         title="Inventory", products=products,
      )

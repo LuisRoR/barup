@@ -26,24 +26,30 @@
       
         <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
         {% if products|length > 0 %}
-            <div class="product-section">
+            <div class="product-section-inventory">
             {% for product in products: %}
                 <form method="POST">
-                    <div class="product-card">
-                        <div class="product-card-thumbnail">
-                             <div class="card-product-img-wrapper"> 
+                    <div class="product-card-inventory ">
+                        <div class="product-card-thumbnail-inventory ">
+                             <div class="card-product-img-wrapper-inventory "> 
+                               
                                 <input type="hidden" name="product_id" value="{{ product.id }}"/>
+                         
+                                <!--
                                 <button class="expanded button-hover-addcart button" formaction="/buy"><span>Buy</span><i class="fa fa-shopping-cart"></i></button>
+                             -->
                                 <a href="#"><img src="static/media/{{product.label_name }}"></a>
                             </div> <!-- END IM WRAPPER -->
                         </div> <!-- END CAR THUMBNAIL -->
-                        <h2 class="product-card-title"><a href="#">{{product.name}}</a></h2>
-                        <span class="product-card-desc">{{product.description}}</span>
+                        <h2 class="product-card-title-inventory "><a href="#">{{product.name}}</a></h2>
+                        
                         <!--
                         <span class="product-card-price">$9.99</span>
                         <span class="product-card-sale">$12.99</span>
                         -->
                         <hr>
+
+                        <!--
                         <div class="order-form"> 
                             <div class="oder-price">
                                 <span class="order-label">Price:</span>
@@ -57,6 +63,8 @@
                                 <input class="quantity" name="quantity" type="number" value="0" min="0" max="1000">
                             </div>
                         </div>
+                    -->
+
 <!--
                         <div class="input-group input-number-group">
                             <input class="input-number" id="quantity" name="quantity" type="number" value="" min="0" max="1000">
@@ -68,7 +76,41 @@
             {% endfor %} 
             </div>  <!-- END product-section -->
     
-        {% endif %}       
+        {% endif %}   
+        
+        
+        <div class="bottom-content-section">
+            <div class="flex-container-date-range">
+                <div class="form-floating-label">
+                    <input type="date" name="start-date">
+                    <label class="label-date-range" for="start-date" >From:</label>
+                </div>
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+
+                <div class="form-floating-label">
+                    <input type="date" name="end-date">
+                    <label class="label-date-range" for="end-date" >To:</label>
+                </div>
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+
+                <div>
+                    <!--
+                    <label class="submit-date" for="date_qry"> - </label>>
+                    -->
+                    <input class="btn-inventory" id="date_qry" name="date_qry" type="submit"  formaction="/display_purchase">
+                </div> 
+            </div>
+        </div> <!--   END of bottom-content-section   -->
    
         </div> <!-- END HERO -->
 

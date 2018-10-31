@@ -52,6 +52,21 @@
         </div>    ***************   END "middle-content-section"
     -->    
 
+    <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
+    {% if purchases|length > 0 %}
+        <div class="product-section">
+        {% for purchase in purchases: %}
+        
+            <div class="test-purchase">
+            <h2>{{purchase.id}}</h2>
+            </div>
+
+        {% endfor %} 
+        </div>  <!-- END product-section -->
+
+    {% endif %}  
+
+
     <div class="bottom-content-section">
         <div class="flex-container-date-range">
             <div class="form-floating-label">
@@ -85,19 +100,7 @@
         </div>
     </div>
       
-        <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
-        {% if purchases|length > 0 %}
-            <div class="product-section">
-            {% for purchase in purchases: %}
-            
-                <div class="test-purchase">
-                <h2>{{purchase.id}}</h2>
-                </div>
-   
-            {% endfor %} 
-            </div>  <!-- END product-section -->
-    
-        {% endif %}  
+
         
 
    
