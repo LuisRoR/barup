@@ -49,7 +49,6 @@ class Purchase (db.Model):
         self.price = price
         self.product_id = product
         if purchase_date is None:
-            #purchase_date = datetime.utcnow()
             purchase_date = date.today()
         self.purchase_date = purchase_date
 
@@ -69,5 +68,3 @@ class Inventory_check (db.Model):
             date_measured  = date.today()
         self.date_measured  = date_measured                 
 
-#current_date = datetime.date.today()
-#.strftime("%Y%m%d")
