@@ -7,6 +7,7 @@ from sqlalchemy.sql import exists, text
 from sqlalchemy.orm import lazyload
 from jinja2 import Template
 from sqlalchemy.orm.query import Query
+import os
 
 
 @app.template_filter('datetimeformat')
@@ -532,4 +533,4 @@ def single_user():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=os.environ['PORT'])
