@@ -170,7 +170,7 @@ def display_purchase():
 def inventory():
 
     if request.method == 'GET':
-        return render_template('Inventory.html')
+        return render_template('inventory.html')
    
     start_date = request.form['start-date']
     if start_date is None:
