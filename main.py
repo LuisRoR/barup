@@ -255,7 +255,7 @@ def inventory():
 
     #sql = text('SELECT Product.id FROM Product INNER JOIN Purchase ON Product.id = product_id INNER JOIN Inventory_check ON Purchase.id = purchase_id')
     
-    sql = text('SELECT Inventory_check.id, Product.name FROM Inventory_check INNER JOIN Purchase ON Purchase.id = purchase_id INNER JOIN Product ON Product.id = product_id')
+    #sql = text('SELECT Inventory_check.id, Product.name FROM Inventory_check INNER JOIN Purchase ON Purchase.id = purchase_id INNER JOIN Product ON Product.id = product_id')
     
 
     #products = Product.query.from_statement(sql).all()
@@ -265,10 +265,10 @@ def inventory():
     #products = db.session.query(Product).join(Purchase).all()
     
 
-    products = db.session.query(Product, Purchase, Inventory_check).filter(Product.id == Purchase.product_id).filter(Purchase.id == Inventory_check.purchase_id).all()
-    print('*******************', products)
+    products = db.session.query(Product, Purchase, Inventory_check).filter(Product.id == Purchase.product_id).filter(Purchase.id == Inventory_check.purchase_id).filter(Inventory_check.date_consumed > start_date, Inventory_check.date_consumed > end_date).all()
+    #print('*******************', products)
 
-    results = list(map(lambda row: {"brand": row[0].brand, "name": row[0].name, "approx_level": row[2].approx_level}, products))
+    results = list(map(lambda row: {"brand": row[0].brand, "name": row[0].name, "label_name": row[0].label_name, "approx_level": row[2].approx_level, "id": row[2].id}, products))
 
     #results = db.engine.execute(sql)
     #names = []
@@ -278,7 +278,7 @@ def inventory():
     #print ('*******************',names)
 
     return render_template('inventory.html',
-        title="Inventory", products=products, results=results,
+        title="Inventory", results=results,
     )
 
 
@@ -533,4 +533,6 @@ def single_user():
 
 
 if __name__ == '__main__':
-    app.run(port=os.environ['PORT'])
+    app.run()
+    #app.run(port=os.environ['PORT'])
+    #    app.run(port=os.environ['PORT'])

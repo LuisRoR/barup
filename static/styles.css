@@ -574,6 +574,8 @@ body {
   display: block;
   font-family: 'Open sans', sans-serif;
   font-size: 0.85rem;
+
+  height: 150px;
 }
 
 .product-card-price {
@@ -631,6 +633,7 @@ body {
   color: whitesmoke;
   display: block;
   font-family: 'Open sans', sans-serif;
+  margin-top: 1rem;
   font-size: 0.85rem;
 }
 
@@ -1414,6 +1417,7 @@ input[type=range][orient=vertical]
 .flex-container-bottle{
   display: flex;
   flex-direction: row;
+  height: 50px;
 }
 
 .make-smller{

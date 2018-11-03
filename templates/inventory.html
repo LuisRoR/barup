@@ -25,34 +25,23 @@
         </div>
       
         <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
-        {% if products|length > 0 %}
+        {% if results |length > 0 %}
             <div class="product-section-inventory">
-            <table>
-            {% for result in results: %} 
-
-            <tr>
-                <td>brand: {{result.brand}}</td>
-                <td>name: {{result.name}}</td>
-                <td>Level: {{result.approx_level}}</td>
-            </tr>
-            {% endfor %} 
-            </table>  
-            {% for product in products: %}
+            {% for result in results: %}
                 <form method="POST">
                     <div class="product-card-inventory ">
                         <div class="product-card-thumbnail-inventory ">
                              <div class="card-product-img-wrapper-inventory "> 
                                
-                                <input type="hidden" name="product_id" value="{{ product.id }}"/>
+                                <input type="hidden" name="product_id" value="PLACEHOLDER"/>
                          
                                 <!--
                                 <button class="expanded button-hover-addcart button" formaction="/buy"><span>Buy</span><i class="fa fa-shopping-cart"></i></button>
                              -->
-                                <a href="#"><img src="static/media/{{product[0].label_name }}"></a>
+                                <a href="#"><img src="static/media/{{result.label_name }}"></a>
                             </div> <!-- END IM WRAPPER -->
                         </div> <!-- END CAR THUMBNAIL -->
-                        <h2 class="product-card-title-inventory "><a href="#">{{product.id}}</a></h2>
-                        <h2 class="product-card-title-inventory "><a href="#">{{product.purchase_id}}</a></h2>
+                        <h2 class="product-card-title-inventory "><a href="#">{{result.name}}</a></h2>
                         <!--
                         <span class="product-card-price">$9.99</span>
                         <span class="product-card-sale">$12.99</span>
@@ -60,15 +49,14 @@
 
                         <div class="flex-container-bottle">
                             <a href="#"><img class="empty-bottle" src="static/media/b_100.svg"></a>
-                            <label for="volume">Volume</label>
-                            <input type="number" id="days-off-count" value="100" min="0" max="100"/>
-                           
+                            <h2 class="product-card-desc-inventory"><a href="#"> Volume</a></h2>
+                            <input type="number" id="days-off-count" value="{{result.approx_level}}" min="0" max="100"/>
+                            <input type="hidden" name="inventory_id" value="{{result.id}}"/>
+                            <button class="button expanded button-rounded-hover"  formaction="/update">Update</button>
                             
                         </div>
                         
-                        
-     
-
+                 
                             <!--
                             <input class="slider" type="range" id="start" name="volume" min="0" max="10" />
                     -->
@@ -114,32 +102,6 @@
             </div>  <!-- END product-section -->
     
         {% endif %}   
-
-
-
-
-
-        
-
-        {% if all_inventory|length > 0 %} 
-        <div clas="white">
-                <div>
-                    <table>
-                        <tr>
-                            <td clas="bg_white"> 
-                                {% for bottle in all_inventory: %} 
-                                    {{bottle.id}}
-                                {% endfor %} 
-                            </td>
-                        </tr>
-                    </table>
- 
-                </div>  
-        </div>
-        {% endif %} 
-
-
-
 
 
 
