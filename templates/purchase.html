@@ -23,48 +23,24 @@
                 </div>
             </div>
         </div>
-<!--
+
         <div class="middle-content-section">
-            <div class="flex-container-date">
-                <div>
-                    <label class="label-date" for="start">Purchases START date:</label>
-                    <input type="date" id="start" name="start-date" min="2017-01-01" max="2018-11-08" required>
-                </div>
-                <div class="order-spacer">
-                        <span> - </span>
-                </div>
-                <div>
-                    <label class="label-date" for="end">Purchases END date:</label>
-                    <input type="date" id="end" name="end-date" min="2017-01-01" max="2018-11-08" required>
-                </div>
+            {% if purchases|length > 0 %}
+            <div class="product-section">
+                {% for purchase in purchases: %}
+                
+                    <div class="test-purchase">
+                    <h2>{{purchase.id}}</h2>
+                    </div>
 
-                <span class="validity"></span>
-
-                <div class="order-spacer">
-                        <span> - </span>
-                </div>
-
-                <div>
-                    <label class="submit-date" for="invoice"> - </label>
-                    <input class="btn-date" id="invoice" name="invoice" type="submit"  formaction="/display_purchase">
-                </div>  
-            </div>
-        </div>    ***************   END "middle-content-section"
-    -->    
+                {% endfor %} 
+            </div>  <!-- END product-section -->
+            {% endif %}  
+        </div>  <!--  ***************   END "middle-content-section" -->
+ 
 
     <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
-    {% if purchases|length > 0 %}
-        <div class="product-section">
-        {% for purchase in purchases: %}
-        
-            <div class="test-purchase">
-            <h2>{{purchase.id}}</h2>
-            </div>
 
-        {% endfor %} 
-        </div>  <!-- END product-section -->
-
-    {% endif %}  
 
 
     <div class="bottom-content-section">

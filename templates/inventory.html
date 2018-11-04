@@ -28,89 +28,42 @@
         {% if results |length > 0 %}
             <div class="product-section-inventory">
             {% for result in results: %}
-                <form method="POST">
+                <!-- <form method="POST"> -->
                     <div class="product-card-inventory ">
                         <div class="product-card-thumbnail-inventory ">
                              <div class="card-product-img-wrapper-inventory "> 
                                
                                 <input type="hidden" name="product_id" value="PLACEHOLDER"/>
-                         
-                                <!--
-                                <button class="expanded button-hover-addcart button" formaction="/buy"><span>Buy</span><i class="fa fa-shopping-cart"></i></button>
-                             -->
+              
                                 <a href="#"><img src="static/media/{{result.label_name }}"></a>
                             </div> <!-- END IM WRAPPER -->
                         </div> <!-- END CAR THUMBNAIL -->
                         <h2 class="product-card-title-inventory "><a href="#">{{result.name}}</a></h2>
-                        <!--
-                        <span class="product-card-price">$9.99</span>
-                        <span class="product-card-sale">$12.99</span>
-                        -->
 
                         <div class="flex-container-bottle">
                             <a href="#"><img class="empty-bottle" src="static/media/b_100.svg"></a>
                             <h2 class="product-card-desc-inventory"><a href="#"> Volume</a></h2>
-                            <input type="number" id="days-off-count" value="{{result.approx_level}}" min="0" max="100"/>
-                            <input type="hidden" name="inventory_id" value="{{result.id}}"/>
-                            <button class="button expanded button-rounded-hover"  formaction="/update">Update</button>
+                            <input type="number" id="new-level" name="new-level" value="{{result.approx_level}}" min="0" max="100"/>
+                            <input type="hidden" name="inventory-id" value="{{result.id}}"/>
+                            <!-- <button class="button expanded button-rounded-hover"  formaction="/update">Update</button> -->
                             
-                        </div>
-                        
-                 
-                            <!--
-                            <input class="slider" type="range" id="start" name="volume" min="0" max="10" />
-                    -->
-                     
-                        
+                        </div> 
 
-                        <hr>
-
-                        <!--
-                        <div class="order-form"> 
-                            <div class="oder-price">
-                                <span class="order-label">Price:</span>
-                                <input class="price" name="price" type="text" value="">
-                            </div>
-                            <div class="order-spacer">
-                                <span> - </span>
-                            </div>
-                            <div class="oder-qty">
-                                <span class="order-label">Qty:</span>
-                                <input class="quantity" name="quantity" type="number" value="0" min="0" max="1000">
-                            </div>
-                        </div>
-                    -->
-
-<!--
-                        <div class="input-group input-number-group">
-                            <input class="input-number" id="quantity" name="quantity" type="number" value="" min="0" max="1000">
-                        </div>
-                    -->
-                       
-                   </div> <!-- END product-card-->
-
-
-
-
-
-
-
-
-                </form>
+                        <hr>         
+                    </div> <!-- END product-card-inventory -->
+                <!-- </form> -->
             {% endfor %} 
             
             </div>  <!-- END product-section -->
     
         {% endif %}   
+        <input type="hidden" name="results" value={{results}}>
+        <input type="hidden" name="inventory-products" value={{inventory_products}}>
 
-
-
-
-        
         <div class="bottom-content-section">
             <div class="flex-container-date-range">
                 <div class="form-floating-label">
-                    <input type="date" name="start-date">
+                    <input type="date" name="start-date" value="{{start_date}}">
                     <label class="label-date-range" for="start-date" >From:</label>
                 </div>
 
@@ -121,7 +74,7 @@
                 </div>
 
                 <div class="form-floating-label">
-                    <input type="date" name="end-date">
+                    <input type="date" name="end-date" value="{{end_date}}">
                     <label class="label-date-range" for="end-date" >To:</label>
                 </div>
 
@@ -139,10 +92,10 @@
                 </div> 
             </div>
         </div> <!--   END of bottom-content-section   -->
-   
+        <button class="button expanded button-rounded-hover"  formaction="/update">Update</button>
         </div> <!-- END HERO -->
 
 
         <script type="text/javascript" src="{{ url_for('static', filename='cart.js') }}"></script>
-
+</form>
 {% endblock %}
