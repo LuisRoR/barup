@@ -598,6 +598,129 @@ body {
 
 
 /****************************************/
+/*    hero-full-screen-reports-index     */
+/****************************************/
+.hero-full-screen-reports-index   {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("bar27.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.hero-full-screen-reports-index  .middle-content-section {
+  text-align: center;
+  color: #fefefe;
+}
+
+.hero-full-screen-reports-index  .middle-content-section .quote {
+  text-align: right;
+  color: #fefefe;
+  padding-right: 10px;
+}
+
+.hero-full-screen-reports-index   .top-content-section {
+  width: 100%;
+}
+
+.hero-full-screen-report_index  .bottom-content-section {
+  padding: 1rem;
+}
+
+.hero-full-screen-reports-index   .bottom-content-section svg {
+  height: 3.75rem;
+  width: 3.75rem;
+  fill: #fefefe;
+}
+
+.hero-full-screen-reports-index   .top-bar {
+  background: transparent;
+}
+
+.hero-full-screen-reports-index   .top-bar .menu {
+  background: transparent;
+}
+
+.hero-full-screen-reports-index   .top-bar .menu-text {
+  color: #fefefe;
+}
+
+.hero-full-screen-reports-index   .top-bar .menu li {
+  display: flex;
+  align-items: center;
+}
+
+.hero-full-screen-reports-index   .top-bar .menu a {
+  color: #fefefe;
+  font-weight: bold;
+}
+
+
+/****************************************/
+/*     hero-full-screen-consumption     */
+/****************************************/
+.hero-full-screen-consumption  {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("bar28.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+.hero-full-screen-consumption .middle-content-section {
+  text-align: left;
+  color: #fefefe;
+}
+
+.hero-full-screen-consumption .report{
+  height: 380px;
+  overflow-y: scroll;  
+}
+
+.hero-full-screen-consumption .top-content-section {
+  width: 100%;
+}
+
+.hero-full-screen-consumption .bottom-content-section {
+  padding: 1rem;
+}
+
+.hero-full-screen-consumption .bottom-content-section svg {
+  height: 3.75rem;
+  width: 3.75rem;
+  fill: #fefefe;
+}
+
+.hero-full-screen-consumption .top-bar {
+  background: transparent;
+}
+
+.hero-full-screen-consumption .top-bar .menu {
+  background: transparent;
+}
+
+.hero-full-screen-consumption.top-bar .menu-text {
+  color: #fefefe;
+}
+.hero-full-screen-consumption .top-bar .menu li {
+  display: flex;
+  align-items: center;
+}
+
+.hero-full-screen-consumption .top-bar .menu a {
+  color: #fefefe;
+  font-weight: bold;
+}
+
+
+
+
+
+/****************************************/
 /*              card-product            */
 /****************************************/
 .card-product-form {

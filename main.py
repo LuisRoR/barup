@@ -309,7 +309,14 @@ def create():
         title="create", 
      )
 
-@app.route('/reports', methods=['GET'])
+@app.route('/reports-index', methods=['GET'])
+def reports_index():
+
+    return render_template('reports_index.html',
+        title="Reports Index", 
+     )
+
+@app.route('/reports', methods=['GET', 'POST'])
 def reports():
 
     return render_template('reports.html',
@@ -319,13 +326,18 @@ def reports():
 @app.route('/reports-sales', methods=['GET'])
 def reports_sales():
 
-    
 
     return render_template('reports_sales.html',
         title="Sales report", 
      )
 
-     
+@app.route('/consumption', methods=['GET', 'POST'])
+def consumption():
+
+    
+    return render_template('consumption.html',
+        title="consumption", 
+     ) 
 
 @app.route('/graph')
 def graph():

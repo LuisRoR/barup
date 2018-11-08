@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form method="post">
-      <div class="hero-full-screen">
+  <form method="POST">
+      <div class="hero-full-screen-reports-index">
         <div class="top-content-section">
             <div class="top-bar">
               <div class="top-bar-left">
@@ -29,8 +29,17 @@
         <br>
         
         <div class="middle-content-section">
-          <h1>BarUp</h1>
-          <h2>A bar inventory tool served straight up!</h2>
+          <h1>“Don't bother with churches, government buildings or city squares, if you want to know about a culture, spend a night in its bars” </h1>
+          <h2 class="quote">― Ernest Hemingway </h2>
+            <div class="row columns">
+                <button class="button expanded button-rounded-hover"  formaction="/reports">Purchases</button>
+            </div>  
+            <div class="row columns">
+                <button class="button expanded button-rounded-hover"  formaction="/consumption">Consumption</button>
+            </div>  
+            <div class="row columns">
+                <button class="button expanded button-rounded-hover"  formaction="/product">Sales</button>
+            </div>  
         </div>
       
         <div class="bottom-content-section" data-magellan data-threshold="0">
@@ -38,9 +47,11 @@
 
  
     </div> <!-- END HERO --> 
-  </form>
+ 
   
 
   <script  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+
+</form>
 {% endblock %}
