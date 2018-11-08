@@ -43,10 +43,16 @@
             <table>
               <tr>
                 <td><img src="https://www.countryflags.io/{{product.country}}/flat/64.png"></td>
-                <td> {{product.volume}}</td>
-                <td><h8>Vintage </h8>{{product.vintage}}</td>
+                <td> Volume: {{product.volume}}</td>
+
+                {% if product.vintage > 0: %}
+                  <td><h8>Vintage: </h8>{{product.vintage}}</td>
+                {% else %}
+                  <td><h8>Vintage: </h8>n/a</td>
+                {% endif %}
+              
               </tr> 
-              <tr><h7 class="card-product-price">{{product.category}}</h7></tr> 
+              <tr><h7 class="card-product-price">Category: {{product.category}}</h7></tr> 
             </table>
 
             <p class="card-product-description">{{product.description}}</p>
@@ -55,7 +61,7 @@
         <div class="order-form"> 
           <div class="oder-price">
               <span class="order-label">Price:</span>
-              <input class="price" name="price" type="text" value="">
+              <input class="price" name="price" type="text" value="" required>
           </div>
           <div class="order-spacer">
               <span> - </span>

@@ -19,24 +19,78 @@ def datetimeformat(value, format='%B %d, %Y'):
 @app.route("/chart")
 def chart():
 
-    i = 0
-    test = ''
-    labels = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
-    values = [0,0,0,0,0,0,0,0,0,0,0,0]
-    listLen = len(labels)
+    labels = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    #f or pie chart
+    colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC", "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA"  ]
+    
+    values = []
+
     format='%B'
+
+    jan = 0
+    feb = 0
+    mar = 0
+    apr = 0
+    may = 0
+    jun = 0
+    jul = 0
+    aug = 0
+    sep = 0
+    octo = 0
+    nov = 0
+    dec = 0
+
+    total = 0
+    
     purchases = Purchase.query.filter_by().all()
     
-    total = 0
     for purchase in purchases:
-        total += purchase.price * purchase.quantity
-        test = purchase.purchase_date.strftime(format)
+        val = purchase.price * purchase.quantity
+        month = purchase.purchase_date.strftime(format)
+        total += val
 
-        if (test == labels[i]):
-            values.insert(i, (purchase.price * purchase.quantity)) 
+        if month == 'January':
+            jan += val
+        elif month == 'February':  
+            feb += val
+        elif month == "March":
+            mar += val
+        elif month == 'April':
+            apr += val
+        elif  month == 'May':  
+            may += val
+        elif month == "June":
+            jun += val
+        elif month == 'July':
+            jul += val
+        elif month == 'August':  
+            aug += val
+            total += val
+        elif month == "September":
+            sep += val
+        elif month == 'October':
+            octo += val
+        elif month == 'November':  
+            nov += val
+        else:
+            dec += val
+            total += val
 
-    return render_template('chart.html', values=values, labels=labels, total=total)
+    values.append(jan)        
+    values.append(feb)
+    values.append(mar)
+    values.append(apr)        
+    values.append(may)
+    values.append(jun)
+    values.append(jul)        
+    values.append(aug)
+    values.append(sep)
+    values.append(octo)        
+    values.append(nov)
+    values.append(dec)
+
+    return render_template('chart.html', values=values, labels=labels, total=total, set=zip(values, labels, colors))
  
 
 @app.route('/', methods=['GET'])
@@ -61,10 +115,22 @@ def catalog():
 @app.route('/buy', methods=['POST'])
 def add_to_cart():
 
-    quantity = (int)(request.form['quantity'])
-    price = (float)(request.form['price'])
+    quantity = (request.form['quantity'])
+    price = (request.form['price'])
+    print('@@@@@@@@@@@@@@@@@@@')
+    print('@@@@@@@@@@@@@@@@@@@', price)
     product_id = (int)(request.form['product_id'])
   
+    if quantity == 0:
+        error = 'quantity is required before proceding with purchase'
+        return redirect("/catalog?=" + error) 
+
+    if price is None:
+        error = 'price is required before proceding with purchase'
+        return redirect("/catalog?=" + error) 
+
+    quantity = (int)(quantity)
+    pri = (float)(price)
 
     new_purchase = Purchase(quantity, price, product_id,)
     db.session.add(new_purchase)
@@ -74,7 +140,7 @@ def add_to_cart():
     temp_id = new_purchase.id
     bottle = 0
     while bottle < temp_qty:
-        new_inventory = Inventory_check(100.00, 1400, temp_id, '2020-01-01', )
+        new_inventory = Inventory_check(100.00, 1400, temp_id, None )
         db.session.add(new_inventory)
         bottle += 1
    
@@ -94,13 +160,16 @@ def product():
     brand = request.form['brand']
     name = request.form['name']
     bottle_weight = 1400.00
-    vintage = 2000
+    vintage = request.form['vintage']
     label_name  = request.form['label_name']
     country = request.form['country']
     volume = request.form['volume']
-    category = "spirit"
+    category = request.form['category']
     description = request.form['description']
     
+    if vintage == "n/a":
+        vintage = 0
+
     name_query = Product.query.filter(Product.name == name)
     if ( name_query.count() > 0 ):
         error = 'Prouct already exist'
@@ -137,14 +206,14 @@ def display_purchase():
 
 
     return render_template('display_purchase.html', 
-        title="Display purchase", purchases=purchases , start=start_date, end=end_date, total=total,
+        title="Display purchase", purchases=purchases , start_date=start_date, end_date=end_date, total=total,
     )
 
-@app.route('/inventory', methods=['POST', 'GET'])
+@app.route('/inventory', methods=['GET', 'POST'])
 def inventory():
 
     if request.method == 'GET':
-        return render_template('inventory.html')
+       return render_template('inventory.html')
    
     start_date = request.form['start-date']
     if start_date is None:
@@ -159,13 +228,36 @@ def inventory():
     results = list(map(lambda row: {"brand": row[0].brand, "name": row[0].name, "label_name": row[0].label_name, "approx_level": row[2].approx_level, "id": row[2].id}, inventory_products))
 
 
-    return render_template('inventory.html',
-        title="Inventory", results=results, start_date=start_date, end_date=end_date, inventory_products=inventory_products,
+    return render_template('display_inventory.html',
+        title="Display inventory", results=results, start_date=start_date, end_date=end_date, inventory_products=inventory_products,
     )
+
+@app.route('/display_inventory', methods=['POST'])
+def display_inventory():
+
+    start_date = request.form['start-date']
+    end_date = request.form['end-date']
+
+    inventory_products = (
+        db.session.query(Product, Purchase, Inventory_check)
+        .filter(Product.id == Purchase.product_id)
+        .filter(Purchase.id == Inventory_check.purchase_id)
+        .filter(Purchase.purchase_date <= end_date)
+        .filter((Inventory_check.date_consumed == None) | (Inventory_check.date_consumed <= end_date))
+        .order_by(Product.id)
+        .all()
+    )
+   
+    results = list(map(lambda row: {"brand": row[0].brand, "name": row[0].name, "label_name": row[0].label_name, "approx_level": row[2].approx_level, "id": row[2].id}, inventory_products))
+
+
+    return render_template('display_inventory.html',
+        title="Display inventory", results=results, start_date=start_date, end_date=end_date, inventory_products=inventory_products,
+    )   
 
 
 @app.route('/update', methods=['POST', 'GET'])
-def update():
+def update_inventory():
 
     start_date = request.form['start-date']
     end_date = request.form['end-date']
@@ -182,33 +274,31 @@ def update():
         new_level= (float)(new_level)
         print(type(new_level))
         if row_id.approx_level != new_level:
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   BREAK  @@@@@")
              
             if new_level == 0:
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-
-                print('@@@ BEFORE row_id.date.consumed :', row_id.date_consumed )
                 tooday = date.today()
-                print ('2day: ', type(tooday))
-                print(type(row_id.date_consumed ))
                 row_id.date_consumed = tooday
-                print ('@@@ TODAY :', date.today() )
-                print('@@@ AFTER row_id.date.consumed :', row_id.date_consumed )
 
             row_id.approx_level = new_level
 
             db.session.commit()
 
-    inventory_products = db.session.query(Product, Purchase, Inventory_check).filter(Product.id == Purchase.product_id).filter(Purchase.id == Inventory_check.purchase_id).filter(Inventory_check.date_consumed > start_date, Inventory_check.date_consumed > end_date).all()
+    #inventory_products = db.session.query(Product, Purchase, Inventory_check).filter(Product.id == Purchase.product_id).filter(Purchase.id == Inventory_check.purchase_id)..all()
+    inventory_products = (
+        db.session.query(Product, Purchase, Inventory_check)
+        .filter(Product.id == Purchase.product_id)
+        .filter(Purchase.id == Inventory_check.purchase_id)
+        .filter(Purchase.purchase_date <= end_date)
+        .filter((Inventory_check.date_consumed == None) | (Inventory_check.date_consumed <= end_date))
+        .order_by(Product.id)
+        .all()
+    )
    
     results = list(map(lambda row: {"brand": row[0].brand, "name": row[0].name, "label_name": row[0].label_name, "approx_level": row[2].approx_level, "id": row[2].id}, inventory_products))
 
 
-    return render_template('inventory.html',
-        title="Inventory", results=results, start_date=start_date, end_date=end_date, inventory_products=inventory_products,
+    return render_template('display_inventory.html',
+        title="Display inventory", results=results, start_date=start_date, end_date=end_date, inventory_products=inventory_products,
     )
 
 
@@ -226,6 +316,16 @@ def reports():
         title="reports", 
      )
 
+@app.route('/reports-sales', methods=['GET'])
+def reports_sales():
+
+    
+
+    return render_template('reports_sales.html',
+        title="Sales report", 
+     )
+
+     
 
 @app.route('/graph')
 def graph():

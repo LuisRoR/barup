@@ -34,7 +34,7 @@
 
                 <div class="row columns">
                     <div class="form-floating-label">
-                        <input type="text" name="brand">
+                        <input type="text" name="brand" required>
                         <label for="password">Brand</label>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
 
                 <div class="row columns">
                     <div class="form-floating-label">
-                        <input type="text" name="name">
+                        <input type="text" name="name" required>
                         <label for="name">Name</label>
                     </div>
                 </div>
@@ -50,22 +50,22 @@
 
                 <div class="row columns">
                     <div class="form-floating-label">
-                        <input type="text" name="vintage">
+                        <input type="text" name="vintage" required>
                         <label for="vintage">Vintage</label>
                     </div>
                 </div>  
                 <br>
-
+       
                 <div class="row columns">
                     <div class="form-floating-label">
-                        <input type="text" name="label_name">
+                        <input type="text" name="label_name" required>
                         <label for="label_name ">Image Name</label>
                     </div>
                 </div> 
                 <br>
 
                 <div class="row columns">               
-                    <select name="country">
+                    <select class="select-menu" name="country" required>
                     <option value="">Country...</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AL">Albania</option>
@@ -320,35 +320,35 @@
                 </div>
 
                 <div class="row columns">
-                    <select name="volume">
+                    <select class="select-menu" name="volume" required>
                         <option value="">Volume</option>
-                        <option value="standard">750 ml.</option>
-                        <option value="liter">1 ltr.</option>
+                        <option value="750 ml">750 ml.</option>
+                        <option value="1 liter">1 ltr.</option>
                         <option value="keg">keg</option>
-                        <option value="bottled_beer">12 oz.</option>
+                        <option value="12 oz">12 oz.</option>
                     </select>
                 </div>
 
                 <div class="row columns">
-                    <select class="select-menu" name="status">
-                    <option>Category</option>
+                    <select class="select-menu" name="category" required>
+                    <option value="">Category</option>
                     <option value="spirit">spirit</option>
                     <option value="wine">wine</option>
-                    <option value="draught_beer">draught beer</option>
-                    <option value="bottled_beer">bottled beer</option>
+                    <option value="draught beer">draught beer</option>
+                    <option value="bottled beer">bottled beer</option>
                     </select>
                 </div>
 
                 <div class="row columns">
                     <div class="form-floating-label">
-                        <textarea name="description" rows="5" placeholder=""></textarea>
+                        <textarea name="description" rows="5" placeholder="" required></textarea>
                         <label for="textarea">Description</label>
                     </div>  
                 </div>
                 <br>
                 
                 <div class="row columns">
-                <button class="button expanded button-rounded-hover"  formaction="/product">Create</button>
+                    <button class="button expanded button-rounded-hover"  formaction="/product">Create</button>
                 </div>  
             </div> <!-- END OVERAY -->
             

@@ -22,15 +22,18 @@
                 </ul>
                 </div>
             </div>
+        </div> <!--   END top-content-section  -->
+<!--
+        <div class="middle-content-section">
+            <div class="text-date">
+                <h4>Purchases from 2018-10-01 - 2018-11-01</h4> 
+            </div>
         </div>
-
-     
-        <div class="text-date">
-            <h3>Purchases from {{start}} - {{end}}</h3> 
-        </div>
-      
-       
-        {% if purchases|length > 0 %}
+    -->  
+        <div class="middle-content-section-purchase">
+        
+        
+            {% if purchases|length > 0 %}
             <table class="responsive-card-table unstriped">       
                 <thead>
                     <tr>
@@ -44,7 +47,7 @@
                 </thead>
                 <tbody>
                 {% for purchase in purchases: %}
-              
+            
                     <tr>
                         <td data-label="nvoice">{{purchase.id}}</td>
                         <td data-label="Date">{{purchase.purchase_date}}</td>
@@ -57,23 +60,23 @@
                 {% endfor %} 
                 </tbody>
             </table> <!-- END TABLE responsive-card-table unstriped -->
+            {% endif %}  
+            
 
-    
-        {% endif %}  
+
+
+        </div> <!--   END middle-content-section  -->
 
         <table class="grad-total">
-            <tr>
-                <td> Grand Total <smaller>( Purchases from {{start}} - {{end}} )</smaller> : ${{total}}</td>
-            </tr>
+                <tr>
+                    <td> Grand Total <smaller>( Purchases from {{start}} - {{end}} )</smaller> : ${{total}}</td>
+                </tr>
         </table>
-
-
-
-
         <div class="bottom-content-section">
+
             <div class="flex-container-date-range">
                 <div class="form-floating-label">
-                    <input type="date" name="start-date">
+                    <input type="date" name="start-date" value="{{start_date}}">
                     <label class="label-date-range" for="start-date" >From:</label>
                 </div>
 
@@ -84,7 +87,7 @@
                 </div>
 
                 <div class="form-floating-label">
-                    <input type="date" name="end-date">
+                    <input type="date" name="end-date" value="{{end_date}}">
                     <label class="label-date-range" for="end-date" >To:</label>
                 </div>
 
@@ -109,5 +112,6 @@
 
 
     <script type="text/javascript" src="{{ url_for('static', filename='cart.js') }}"></script>
+</form>
 
 {% endblock %}

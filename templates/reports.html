@@ -1,38 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
+<form method='POST'>
+  <div class="hero-full-screen-reports">
+    <div class="top-content-section">
+        <div class="top-bar">
+            <div class="top-bar-left">
+            <ul class="menu">
+                <!-- <li class="menu-text"><img src="http://placehold.it/75x30" alt="logo"></li>-->
+                <li><a href="/">Home</a></li>
+                <li><a href="/create">Create</a></li>
+                <li><a href="/catalog">Catalog</a></li>
+                <li><a href="/purchase">Purchase</a></li>
+                <li><a href="/inventory">Inventory</a></li>
+                <li><a href="/reports">Reports</a></li> 
+            </ul>
+            </div>
+            <div class="top-bar-right">
+            <ul class="menu">
+                <li><a href="/test"><i class="fa fa-2x fa-shopping-cart" aria-hidden="true"></i></a></li>
+            </ul>
+            </div>
+        </div>
+    </div> <!-- END top-content-section -->
 
-<div>
-<ul class="bar-graph">
-    <li class="bar-graph-axis">
-      <div class="bar-graph-label">100%</div>
-      <div class="bar-graph-label">80%</div>
-      <div class="bar-graph-label">60%</div>
-      <div class="bar-graph-label">40%</div>
-      <div class="bar-graph-label">20%</div>
-      <div class="bar-graph-label">0%</div>
-    </li>
-    <li class="bar primary" style="height: 95%;" title="95">
-      <div class="percent">95<span>%</span></div>
-      <div class="description">Yetis</div>
-    </li>
-    <li class="bar secondary" style="height: 90%;" title="90">
-      <div class="percent">90<span>%</span></div>
-      <div class="description">ZURBians</div>
-    </li>
-    <li class="bar success" style="height: 80%;" title="80">
-      <div class="percent">80<span>%</span></div>
-      <div class="description">Cows</div>
-    </li>
-    <li class="bar warning" style="height: 75%;" title="75">
-      <div class="percent">75<span>%</span></div>
-      <div class="description">Cows that think they're Yetis</div>
-    </li>
-    <li class="bar alert" style="height: 40%;" title="40">
-      <div class="percent">40<span>%</span></div>
-      <div class="description">Who knows</div>
-    </li>
-  </ul>
-</div>
-  
-  {% endblock %}
+    <div class="middle-content-section-reports">
+      <div class="report">
+        <div class='tableauPlaceholder' id='viz1541692982311' style='position: relative'>
+          <noscript>
+            <a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ba&#47;Barup_0&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='Barup_0&#47;Dashboard1' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ba&#47;Barup_0&#47;Dashboard1&#47;1.png' /> 
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='filter' value='publish=yes' />
+          </object>
+        </div>                
+        <script type='text/javascript'>                    
+          var divElement = document.getElementById('viz1541692982311');                    
+          var vizElement = divElement.getElementsByTagName('object')[0];                    
+          vizElement.style.width='1000px';vizElement.style.height='827px';                    
+          var scriptElement = document.createElement('script');                    
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+        </script>
+      </div> <!-- report -->
+    </div> <!-- middle-content-section -->
+    <div class="bottom-content-section-reports">
+    
+    </div> <!-- bottom-content-section -->
+  </div> <!-- hero-full-screen-inventory -->
+</form> 
+{% endblock %}

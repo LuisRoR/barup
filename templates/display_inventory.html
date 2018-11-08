@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method='POST'>
+    <div class="hero-full-screen-inventory">
+        <div class="top-content-section">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                <ul class="menu">
+                    <!-- <li class="menu-text"><img src="http://placehold.it/75x30" alt="logo"></li>-->
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/create">Create</a></li>
+                    <li><a href="/catalog">Catalog</a></li>
+                    <li><a href="/purchase">Purchase</a></li>
+                    <li><a href="/inventory">Inventory</a></li>
+                    <li><a href="/reports">Reports</a></li> 
+                </ul>
+                </div>
+                <div class="top-bar-right">
+                <ul class="menu">
+                    <li><a href="/test"><i class="fa fa-2x fa-shopping-cart" aria-hidden="true"></i></a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+      
+        <!--< a class="button expanded" formaction="add_to_cart()">Buy</a> -->
+        {% if results |length > 0 %}
+            <div class="product-section-inventory">
+            {% for result in results: %}
+                <!-- <form method="POST"> -->
+                    <div class="product-card-inventory ">
+                        <div class="product-card-thumbnail-inventory ">
+                             <div class="card-product-img-wrapper-inventory "> 
+                                <input type="hidden" name="product_id" value="PLACEHOLDER"/>
+              
+                                <a href="#"><img src="static/media/{{result.label_name }}"></a>
+                                
+                            </div> <!-- END IM WRAPPER -->      
+                        </div> <!-- END CAR THUMBNAIL -->
+   
+
+                        <div class="flex-container-bottle">
+
+                            <h3 class="product-card-title-inventory "><a href="#">{{result.name}}</a></h3>
+                            <a href="#"><img class="empty-bottle" src="static/media/{{result.approx_level | int}}.jpg"></a>
+                            <!--<h2 class="product-card-desc-inventory"><a href="#"> Volume</a></h2> -->
+                            <input type="number" id="new-level" name="new-level" value="{{result.approx_level}}" min="0" max="100"/>
+                            <input type="hidden" name="inventory-id" value="{{result.id}}"/>
+                            <!-- <button class="button expanded button-rounded-hover"  formaction="/update">Update</button> -->
+                            
+                        </div> 
+
+                        <hr>         
+                    </div> <!-- END product-card-inventory -->
+                <!-- </form> -->
+            {% endfor %} 
+            
+            </div>  <!-- END product-section -->
+    
+        {% endif %}   
+        <input type="hidden" name="results" value={{results}}>
+        <input type="hidden" name="inventory-products" value={{inventory_products}}>
+
+        <div class="bottom-content-section">
+            <div class="flex-container-date-range">
+                <div class="form-floating-label">
+                    <input type="date" name="start-date" value="{{start_date}}">
+                    <label class="label-date-range" for="start-date" >From:</label>
+                </div>
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+
+                <div class="form-floating-label">
+                    <input type="date" name="end-date" value="{{end_date}}">
+                    <label class="label-date-range" for="end-date" >To:</label>
+                </div>
+
+                <span class="validity"></span>
+
+                <div class="order-spacer">
+                        <span> - </span>
+                </div>
+
+                <div>
+                    <!--
+                    <label class="submit-date" for="date_qry"> - </label>>
+                    -->
+                    <input class="btn-inventory" id="date_qry" name="date_qry" type="submit"  action="/display_inventory">
+                </div> 
+            </div>
+
+            </div> <!--   END of bottom-content-section   -->
+
+            <button class="button expanded button-rounded-hover-update"  formaction="/update">Update</button>
+           
+        </div> <!-- END HERO -->
+
+
+        <script type="text/javascript" src="{{ url_for('static', filename='cart.js') }}"></script>
+</form>
+{% endblock %}
